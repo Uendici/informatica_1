@@ -24,10 +24,11 @@ void caricaTab(Studente t[]);//Carica la tabella chiedendo dati all'utente o gen
 void stampaTab(Studente t[]);//Stampa la tabella allineando correttamente i dati.
 int ricercCog(Studente t[], char cog[]);//Cerca uno studente per cognome, restituendo l'indice (o -1 se non trovato).
 int stampaMedia(Studente t[]);//Stampa la media voti per ogni studente e conta quante medie sono ≥ 6.
+int studenti10(Studente t[]); //Conta gli studenti con almeno un voto pari a 10
 
 int main(){
   Studente t[NUM_STUD];
-  int stato_cognome,media_maggiore_6;
+  int stato_cognome,media_maggiore_6,voto_maggioreUguale10;
   char cog[DIM_COGN];
 
   srand(time(NULL));
@@ -47,7 +48,8 @@ int main(){
     printf("il cognome si trova nella %d posizione.\n",stato_cognome);
   }
   media_maggiore_6 = stampaMedia(t); 
-  printf("gli studenti con la media maggiore al 6 sono: %d",media_maggiore_6);
+  printf("gli studenti con la media maggiore al 6 sono: %d\n",media_maggiore_6);
+  printf("il numero di studenti con almeno un voto equivalenti a 10 sono: %d",voto_maggioreUguale10);
   }
 
 void caricaTab(Studente t[]){
@@ -79,7 +81,7 @@ int ricercCog(Studente t[], char cog[]){
   return -1;
 }
 int stampaMedia(Studente t[]) {
-    int somma, media, count = 0;
+    int somma, media, contatore = 0;
     
     for (int i = 0; i < NUM_STUD; i++) {
         somma = 0;
@@ -91,9 +93,24 @@ int stampaMedia(Studente t[]) {
         printf("La media dello studente %s è %d\n", t[i].cognome, media);
         
         if (media >= 6) {
-            count++;  
+            contatore++;  
         }
     }
     
-    return count;  
+    return contatore;  
+}
+
+int studenti10(Studente t[]) {
+    int contatore = 0;
+
+    for (int i = 0; i < NUM_STUD; i++) {
+        for (int j = 0; j < NUM_VOTI; j++) {
+            if (t[i].voti[j] == 10) {  
+                contatore++;  
+                break;  
+            }
+        }
+    }
+
+    return contatore;  
 }
