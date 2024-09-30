@@ -78,36 +78,22 @@ int ricercCog(Studente t[], char cog[]){
   }
   return -1;
 }
-/*
-int stampaMedia(Studente t[]){
-  int somma = 0,media;
-  for(int i = 0; i < NUM_STUD; i++){
-    for(int j = 0; j < NUM_VOTI - 1; j++){
-      media = 0;
-      somma = t[i].voti[j] + t[i].voti[j+1]; 
-      media = somma / NUM_VOTI;
-    }
-    printf("la media dello studente %s è %d\n", t[i].cognome,media );
-  }
-  return media;
-}
-*/
 int stampaMedia(Studente t[]) {
     int somma, media, count = 0;
     
     for (int i = 0; i < NUM_STUD; i++) {
         somma = 0;
         for (int j = 0; j < NUM_VOTI; j++) {
-            somma += t[i].voti[j];  // Somma tutti i voti dello studente
+            somma += t[i].voti[j];  
         }
-        media = somma / NUM_VOTI;  // Calcola la media
+        media = somma / NUM_VOTI;  
         
         printf("La media dello studente %s è %d\n", t[i].cognome, media);
         
         if (media >= 6) {
-            count++;  // Conta gli studenti con media maggiore o uguale a 6
+            count++;  
         }
     }
     
-    return count;  // Restituisce il numero di studenti con media ≥ 6
+    return count;  
 }
