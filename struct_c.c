@@ -5,7 +5,7 @@
 void caricaTab(Studente t[]);
 
 // Struttura per la data
-typedef struct Data {
+typedef struct {
   int giorno;
   int mese;
   int anno;
