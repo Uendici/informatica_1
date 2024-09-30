@@ -11,7 +11,7 @@ typedef struct {
   int anno;
 } Data;
 // Struttura per lo studente
-typedef struct Studente {
+typedef struct {
   char cognome[DIM_COGN];
   Data data_nascita;
   int voti[NUM_VOTI];
