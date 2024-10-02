@@ -32,12 +32,6 @@ int main(){
   char cog[DIM_COGN];
 
   srand(time(NULL));
-
-  for (int i = 0; i < NUM_STUD; i++) {
-    for (int j = 0; j < NUM_VOTI; j++) {
-        t[i].voti[j] = rand() % 9 + 1; 
-    }
-}
   caricaTab(t);
   printf("nome\tnascita \t voti\n");
   stampaTab(t);
@@ -60,6 +54,11 @@ void caricaTab(Studente t[]){
         printf("Inserisci la data di nascita (gg mm aaaa): ");
         scanf("%d %d %d", &t[i].data_nascita.giorno, &t[i].data_nascita.mese, &t[i].data_nascita.anno); // Legge la data di nascita
     }
+      for (int i = 0; i < NUM_STUD; i++) {
+    for (int j = 0; j < NUM_VOTI; j++) {
+        t[i].voti[j] = rand() % 9 + 1; 
+    }
+}
 }
 void stampaTab(Studente t[]){
   for(int i = 0; i < NUM_STUD; i++){
@@ -90,7 +89,7 @@ int stampaMedia(Studente t[]) {
         }
         media = somma / NUM_VOTI;  
         
-        printf("La media dello studente %s è %d\n", t[i].cognome, media);
+        printf("La media dello studente %s e' %d\n", t[i].cognome, media);
         
         if (media >= 6) {
             contatore++;  
