@@ -54,10 +54,18 @@ int main(){
   stato_cognome = ricercCog(t,cog);
   if(stato_cognome > -1){
     printf("il cognome si trova nella %d posizione.\n",stato_cognome);
+  }else{
+    printf("il cognome non esiste\n");
   }
   media_maggiore_6 = stampaMedia(t);
+  voto_maggioreUguale10 = studenti10(t);
   printf("gli studenti con la media maggiore al 6 sono: %d\n",media_maggiore_6);
-  printf("il numero di studenti con almeno un voto equivalenti a 10 sono: %d",voto_maggioreUguale10);
+  if(voto_maggioreUguale10 > 0){
+    printf("il numero di studenti con almeno un voto equivalenti a 10 sono: %d",voto_maggioreUguale10);
+  }else{
+    printf("non ci sono studenti con almeno un 10\n");
+  }
+
   }
 
 
@@ -112,21 +120,22 @@ int stampaMedia(Studente t[]) {
 
 
 int studenti10(Studente t[]) {
-    int contatore = 0;
-
-
-    for (int i = 0; i < NUM_STUD; i++) {
-        for (int j = 0; j < NUM_VOTI; j++) {
-            if (t[i].voti[j] == 10) {  
-                contatore++;  
-                break;  
-            }
-        }
+  int contatore = 0;
+  for (int i = 0; i < NUM_STUD; i++) {
+    int trovato = 0;
+    for (int j = 0; j < NUM_VOTI; j++) {
+      if (t[i].voti[j] == 10) {
+        trovato = 1;
+      }
     }
-
-
-    return contatore;  
+    if (trovato == 1) {
+      contatore++;
+    }
+  }
+  return contatore;
 }
+
+
 void formattaCogn(Studente t[]){
   int i = 0;
   while (i < NUM_STUD) {
