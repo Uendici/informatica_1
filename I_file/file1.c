@@ -1,16 +1,16 @@
 #include <stdio.h>
 int main(){
-    char nomefile[] = { "/workspace/informatica_1/l_file/test.txt" };
+    char nomefile[] = { "test.txt" };
     char c;
     FILE *puntafile;
     puntafile = fopen(nomefile, "r");
-    if(puntafile == 0){
+    if(puntafile != NULL){
         while (!feof(puntafile)){
             c = fgetc(puntafile);
             printf("%c",c);
         }
     }
-    else{
+    else {
         printf("\n il file non può essere aperto! ");
         
     }
