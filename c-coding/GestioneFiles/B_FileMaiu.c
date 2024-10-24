@@ -19,8 +19,6 @@ int main(){
             }
             fputs(buffer,file2);
         }
-        
-        printf("%s\n", buffer);
     }
     fclose(file);
     fclose(file2);
