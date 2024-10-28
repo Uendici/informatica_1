@@ -5,12 +5,11 @@
 int main() {
     char buffer[100];
     FILE *file = fopen("FileDiProva.txt", "r");
-    FILE *file2 = fopen("copiato.txt", "w");
-
     if (file == NULL) {
         perror("File di origine non trovato");
         return 1;
     }
+    FILE *file2 = fopen("copiato.txt", "w");
     if (file2 == NULL) {
         perror("File di destinazione non trovato");
         fclose(file);
