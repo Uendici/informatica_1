@@ -1,46 +1,63 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#define N 10
+#define N 10  // costante per il numero di record
 
-void stampa(const char *filename, int *elementi_scritti);
-void carica(int dati_da_scrivere[], int *elementi_scritti);
+void scriviFile(FILE *file);
+void leggiFile(FILE *file);
+
+//record
+typedef struct {
+    int id;
+    char nome[50];
+} Record;
 
 int main() {
-    int dati_da_scrivere[N], elementi_scritti;
-    FILE *fileout = fopen("prova1.dat", "wb");
-    if (fileout == NULL) {
-        perror("sbagliato UwU");
-        return 1;
+    FILE *file = fopen("prova1.dat", "a");
+    if (file == NULL) {
+        perror("Errore nell'apertura del file");
+        exit(1);
     }
-    carica(dati_da_scrivere, &elementi_scritti);
-    fwrite(dati_da_scrivere, sizeof(int), N, fileout);
-    fclose(fileout);
-    stampa("prova1.dat", &elementi_scritti);
+
+    scriviFile(file);
+    leggiFile(file); 
+
+    fclose(file);
     return 0;
 }
 
-void carica(int dati_da_scrivere[], int *elementi_scritti) {
-    printf("scrivi 10 numeri\n");
+// funzione per scrivere un file di N record con N costante posta a 10
+void scriviFile(FILE *file) {
+    Record records[N];
+
+    //dati del record
+    printf("Inserisci l'id e il nome per ciascuna persona.\n");
     for (int i = 0; i < N; i++) {
-        printf("%d> ", i + 1);
-        scanf("%d", &dati_da_scrivere[i]);
+        printf("ID %d: ", i + 1);
+        scanf("%d", &records[i].id);
+        printf("Nome %d: ", i + 1);
+        scanf("%s", records[i].nome);
     }
-    *elementi_scritti = N;
+
+     //dati scritti nel file in binario
+    size_t scritto = fwrite(records, sizeof(Record), N, file);
+    if (scritto != N) {
+        perror("Errore nella scrittura del file");
+    } else {
+        printf("File binario scritto con successo!\n");
+    }
+
+    printf("File scritto con successo!\n");
 }
 
-void stampa(const char *filename, int *elementi_scritti) {
-    FILE *filein = fopen(filename, "rb");
-    if (filein == NULL) {
-        perror("Errore apertura file");
-        return;
-    }
-    int buffer[N];
-    size_t elementi_letti = fread(buffer, sizeof(int), N, filein);
-    fclose(filein);
+//funzione per leggere e stampare su monitor le informazioni del file di record 
+//(si usi il controllo di fine file e non il ciclo for con N perché la funzione 
+//sia valida quale che sia il numero di record del file (quindi anche diverso da N))
 
-    printf("Elementi letti: %zu\n", elementi_letti);
-    for (size_t i = 0; i < elementi_letti; i++) {
-        printf("%d ", buffer[i]);
+void leggiFile(FILE *file){
+    char ch;
+    while (fread(&Record, sizeof(Record), 1, file) == 1){
+        
     }
-    printf("\n");
 }
+
