@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-#define N 10  // Costante per il numero di record
+#define N 3  // Costante per il numero di record
 
 // Definizione della struttura Record
 typedef struct {
     int id;
     char nome[50];
+    int voti[5];
 } Record;
 
 // Dichiarazione delle funzioni
 void scriviFile(FILE *file, Record records[]);
 void leggiFile(FILE *file);
+void caricaVoti(FILE *file, Record records[]);
 
 int main() {
     // Apertura del file in modalità append binaria
@@ -20,38 +23,34 @@ int main() {
         perror("Errore nell'apertura del file");
         exit(1);
     }
-
+    srand(time(NULL));
     Record records[N];
 
-    // Scrittura dei record nel file
+    // scrittura dei record nel file
     scriviFile(file, records);
-    fclose(file); // Chiudere il file dopo la scrittura
+    fclose(file); 
 
-    // Riaprire il file in lettura per leggere i record
     file = fopen("prova1.dat", "rb");
     if (file == NULL) {
         perror("Errore nell'apertura del file");
         exit(1);
     }
 
-    // Lettura e visualizzazione dei record
     leggiFile(file);
-    fclose(file); // Chiudere il file dopo la lettura
+    fclose(file);
     return 0;
 }
-
 // Funzione per scrivere N record in un file
 void scriviFile(FILE *file, Record records[]) {
-    // Acquisizione dei dati del record
+    // acquisizione dei dati del record
     printf("Inserisci l'id e il nome per ciascuna persona.\n");
     for (int i = 0; i < N; i++) {
         printf("ID %d: ", i + 1);
-        scanf("%d", &records[i].id); // Aggiunto l'operatore & per passare l'indirizzo
+        scanf("%d", &records[i].id);
         printf("Nome %d: ", i + 1);
-        scanf("%49s", records[i].nome); // Limita l'input a 49 caratteri per evitare overflow
+        scanf("%49s", records[i].nome);
     }
 
-    // Scrittura dei dati nel file in binario
     size_t scritto = fwrite(records, sizeof(Record), N, file);
     if (scritto != N) {
         perror("Errore nella scrittura del file");
@@ -60,11 +59,15 @@ void scriviFile(FILE *file, Record records[]) {
     }
 }
 
-// Funzione per leggere e stampare su monitor le informazioni del file di record 
+// funzione per leggere e stampare su monitor le informazioni del file di record 
 void leggiFile(FILE *file) {
     Record recordvisualizzato;
     printf("CONTENUTO DEL FILE:\n");
-    while (fread(&recordvisualizzato, sizeof(Record), 1, file) == 1) { // Lettura del file
+    while (fread(&recordvisualizzato, sizeof(Record), 1, file) == 1) {
         printf("ID: %d, Nome: %s\n", recordvisualizzato.id, recordvisualizzato.nome);
     }
+}
+
+void carocaVoti(FILE *file, Record records[]){
+
 }
