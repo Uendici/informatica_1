@@ -3,34 +3,34 @@
 #include <time.h>
 #include <string.h>
 
-#define N 3  // Costante per il numero di record
+#define N 10  
 
-// Definizione della struttura Record
 typedef struct {
     int id;
     char nome[50];
     int voti[5];
+    float media;
 } Record;
 
-// Dichiarazione delle funzioni
-void scriviFile(FILE *file, Record records[]); // a)funzione per scrivere un file di N record con N costante posta a 10
-void leggiFile(FILE *file, Record records[]); // b)funzione per leggere e stampare su monitor le informazioni del file di record
-void caricaVoti(Record records[]); // Caricamento dei voti
-int confrontoNome(Record records[]); // c)conta quante volte è presente uno studente che ha il cognome uguale alla stringa passata in output
+void scriviFile(FILE *file, Record records[]); // scrive un file di N record
+void leggiFile(FILE *file); // legge e stampa le informazioni dei record dal file
+void caricaVoti(Record records[]); // caricamento casuale dei voti
+int confrontoNome(Record records[]); // conta quante volte un nome è presente nei record
+void calcolaMediaVoti(Record records[]); // calcola e assegna la media dei voti per ciascun record
+void stampaDettagliVoti(Record records[]); // stampa il nome, la media, il voto più alto e il voto più basso
 
 int main() {
-
     int nomidoppio;
-    FILE *file = fopen("prova1.dat", "ab");
+    FILE *file = fopen("prova1.dat", "wb");
     if (file == NULL) {
         perror("Errore nell'apertura del file");
-        exit(1);
+        return 1;
     }
     srand(time(NULL));
     Record records[N];
 
     caricaVoti(records);
-
+    calcolaMediaVoti(records);
     scriviFile(file, records);
     fclose(file); 
 
@@ -41,16 +41,17 @@ int main() {
     }
 
     nomidoppio = confrontoNome(records);
-    leggiFile(file, records);
+    leggiFile(file);
 
     printf("I nomi uguali sono: %d\n", nomidoppio);
+
+    stampaDettagliVoti(records);
 
     fclose(file);
     return 0;
 }
 
 void scriviFile(FILE *file, Record records[]) {
-
     printf("Inserisci l'id e il nome per ciascuna persona.\n");
     for (int i = 0; i < N; i++) {
         printf("ID %d: ", i + 1);
@@ -67,11 +68,11 @@ void scriviFile(FILE *file, Record records[]) {
     }
 }
 
-void leggiFile(FILE *file, Record records[]) {
+void leggiFile(FILE *file) {
     Record recordvisualizzato;
     printf("CONTENUTO DEL FILE:\n");
     while (fread(&recordvisualizzato, sizeof(Record), 1, file) == 1) {
-        printf("ID: %d, Nome: %s\n", recordvisualizzato.id, recordvisualizzato.nome);
+        printf("ID: %d, Nome: %s, Media: %.2f\n", recordvisualizzato.id, recordvisualizzato.nome, recordvisualizzato.media);
         for (int j = 0; j < 5; j++) {
             printf("Voto %d: %d\n", j + 1, recordvisualizzato.voti[j]);
         }
@@ -100,4 +101,36 @@ int confrontoNome(Record records[]) {
     }
 
     return contatore;
+}
+
+void calcolaMediaVoti(Record records[]) {
+    for (int i = 0; i < N; i++) {
+        int somma = 0;
+        for (int j = 0; j < 5; j++) {
+            somma += records[i].voti[j];
+        }
+        records[i].media = somma / 5.0;
+    }
+}
+
+void stampaDettagliVoti(Record records[]) {
+    for (int i = 0; i < N; i++) {
+        int votoMassimo = records[i].voti[0];
+        int votoMinimo = records[i].voti[0];
+
+        // Trova il voto massimo e minimo
+        for (int j = 1; j < 5; j++) {
+            if (records[i].voti[j] > votoMassimo) {
+                votoMassimo = records[i].voti[j];
+            }
+            if (records[i].voti[j] < votoMinimo) {
+                votoMinimo = records[i].voti[j];
+            }
+        }
+
+        printf("Studente: %s\n", records[i].nome);
+        printf("Voto più alto: %d\n", votoMassimo);
+        printf("Voto più basso: %d\n", votoMinimo);
+        printf("\n");
+    }
 }
