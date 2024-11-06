@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #define N 3  // Costante per il numero di record
 
@@ -12,12 +13,14 @@ typedef struct {
 } Record;
 
 // Dichiarazione delle funzioni
-void scriviFile(FILE *file, Record records[]);
-void leggiFile(FILE *file);
-void caricaVoti(FILE *file, Record records[]);
+void scriviFile(FILE *file, Record records[]); // a)funzione per scrivere un file di N record con N costante posta a 10
+void leggiFile(FILE *file, Record records[]); // b)funzione per leggere e stampare su monitor le informazioni del file di record
+void caricaVoti(Record records[]); // Caricamento dei voti
+int confrontoNome(Record records[]); // c)conta quante volte è presente uno studente che ha il cognome uguale alla stringa passata in output
 
 int main() {
-    // Apertura del file in modalità append binaria
+
+    int nomidoppio;
     FILE *file = fopen("prova1.dat", "ab");
     if (file == NULL) {
         perror("Errore nell'apertura del file");
@@ -26,7 +29,8 @@ int main() {
     srand(time(NULL));
     Record records[N];
 
-    // scrittura dei record nel file
+    caricaVoti(records);
+
     scriviFile(file, records);
     fclose(file); 
 
@@ -36,13 +40,17 @@ int main() {
         exit(1);
     }
 
-    leggiFile(file);
+    nomidoppio = confrontoNome(records);
+    leggiFile(file, records);
+
+    printf("I nomi uguali sono: %d\n", nomidoppio);
+
     fclose(file);
     return 0;
 }
-// Funzione per scrivere N record in un file
+
 void scriviFile(FILE *file, Record records[]) {
-    // acquisizione dei dati del record
+
     printf("Inserisci l'id e il nome per ciascuna persona.\n");
     for (int i = 0; i < N; i++) {
         printf("ID %d: ", i + 1);
@@ -59,15 +67,37 @@ void scriviFile(FILE *file, Record records[]) {
     }
 }
 
-// funzione per leggere e stampare su monitor le informazioni del file di record 
-void leggiFile(FILE *file) {
+void leggiFile(FILE *file, Record records[]) {
     Record recordvisualizzato;
     printf("CONTENUTO DEL FILE:\n");
     while (fread(&recordvisualizzato, sizeof(Record), 1, file) == 1) {
         printf("ID: %d, Nome: %s\n", recordvisualizzato.id, recordvisualizzato.nome);
+        for (int j = 0; j < 5; j++) {
+            printf("Voto %d: %d\n", j + 1, recordvisualizzato.voti[j]);
+        }
+        printf("\n");
     }
 }
 
-void carocaVoti(FILE *file, Record records[]){
+void caricaVoti(Record records[]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < 5; j++) {
+            records[i].voti[j] = rand() % 10 + 1; 
+        }
+    }
+}
 
+int confrontoNome(Record records[]) {
+    int contatore = 0;
+    char nomerichiesto[50];
+    printf("Scrivi il nome da ricercare:\n");
+    scanf("%s", nomerichiesto);
+
+    for (int i = 0; i < N; i++) {
+        if (strcmp(records[i].nome, nomerichiesto) == 0) {
+            contatore++;
+        }
+    }
+
+    return contatore;
 }
