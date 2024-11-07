@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 
-#define N 10  
+#define N 3  
 
 typedef struct {
     int id;
@@ -15,7 +15,7 @@ typedef struct {
 void scriviFile(FILE *file, Record records[]); // scrive un file di N record
 void leggiFile(FILE *file); // legge e stampa le informazioni dei record dal file
 void caricaVoti(Record records[]); // caricamento casuale dei voti
-int confrontoNome(Record records[]); // conta quante volte un nome è presente nei record
+int confrontoNome(Record records[],FILE *file); // conta quante volte un nome è presente nei record
 void calcolaMediaVoti(Record records[]); // calcola e assegna la media dei voti per ciascun record
 void stampaDettagliVoti(Record records[]); // stampa il nome, la media, il voto più alto e il voto più basso
 
@@ -37,10 +37,10 @@ int main() {
     file = fopen("prova1.dat", "rb");
     if (file == NULL) {
         perror("Errore nell'apertura del file");
-        exit(1);
+        return 1;
     }
 
-    nomidoppio = confrontoNome(records);
+    nomidoppio = confrontoNome(records,file);
     leggiFile(file);
 
     printf("I nomi uguali sono: %d\n", nomidoppio);
@@ -88,18 +88,21 @@ void caricaVoti(Record records[]) {
     }
 }
 
-int confrontoNome(Record records[]) {
+int confrontoNome(Record records[],FILE *file) {
     int contatore = 0;
     char nomerichiesto[50];
+    Record record;
+
     printf("Scrivi il nome da ricercare:\n");
     scanf("%s", nomerichiesto);
 
-    for (int i = 0; i < N; i++) {
-        if (strcmp(records[i].nome, nomerichiesto) == 0) {
+    fseek(file, 0, SEEK_SET);
+
+    while (fread(&record, sizeof(Record), 1, file)) {
+        if (strcmp(record.nome, nomerichiesto) == 0) {
             contatore++;
         }
     }
-
     return contatore;
 }
 
