@@ -49,5 +49,6 @@
         "f_filelog": "cpp",
         "stdlib.h": "c",
         "esercitazione_pre_verifica": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
