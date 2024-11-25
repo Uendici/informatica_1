@@ -4,7 +4,6 @@
 #define N 3
 typedef struct{
     int numeretto;
-
 }struttura;
 
 void carica(struttura struttura1[],FILE *file);

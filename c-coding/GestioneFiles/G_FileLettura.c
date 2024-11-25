@@ -1,11 +1,30 @@
-//Scrivi  un  programma  che  esegue  la  copia  di  un  file  di  testo.  Il  programma  
-//legge  carattere per carattere il contenuto del file “file_src” e lo ricopia nel file “file_dst”. “file_src” e “file_dst” vanno 
 #include <stdio.h>
-int main(){
-    FILE *fileletto = fopen("file_src.txt","r");
-    if(fileletto == NULL){
-        perror("file non trovato");
-        return 1;
+#include <stdlib.h>
+
+int main() {
+    FILE *file, *fileCopia;
+    char ch;
+    // apertura del file per poter leggere il contenuto e cambiarlo
+    file = fopen("in.txt", "r");
+    if (file == NULL) {
+        perror("Errore dell'apertura del file ");
+        return 1; 
     }
-    
+    // apertura del file nel quale verrà copiato il contenuto del primo file
+    fileCopia = fopen("out.txt", "w");
+    // copia effettivamente avvenuta
+    while ((ch = fgetc(file)) != EOF) {
+        if (fputc(ch, fileCopia) == EOF) {
+            perror("copiatura del file non avvenuta");
+            fclose(file);
+            fclose(fileCopia);
+            return 1;
+        }
+    }
+
+    printf("copia del contenuto avvenuta\n");
+
+    fclose(file);
+    fclose(fileCopia);
+    return 0;
 }
