@@ -14,8 +14,10 @@ denominatore = n; }
 int getNumeratore() { return numeratore; }
 int getDenominatore() { return denominatore; }
 void setNumeratoreDenom(int n, int d)
-{ numeratore = n;
-denominatore =d; }
+{ 
+numeratore = n;
+denominatore =d; 
+}
 void stampa() { 
 cout << numeratore << "/" << denominatore;
 int n=getNumeratore(); 
