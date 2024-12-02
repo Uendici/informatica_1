@@ -1,23 +1,34 @@
 #include <iostream>
 using namespace std; 
+
 class Frazione {
 private: 
 int numeratore;
 int denominatore;
 
 public:
-Frazione (){}; 
+Frazione (){};
 void setNumeratore(int n) {
-numeratore = n; }
-void setDenominatore(int n) {
-denominatore = n; }
-int getNumeratore() { return numeratore; }
-int getDenominatore() { return denominatore; }
-void setNumeratoreDenom(int n, int d)
-{ 
-numeratore = n;
-denominatore =d; 
+    numeratore = n; 
 }
+
+void setDenominatore(int n) {
+    denominatore = n; 
+}
+
+int getNumeratore() { 
+    return numeratore; 
+}
+
+int getDenominatore() {
+     return denominatore; 
+}
+
+void setNumeratoreDenom(int n, int d) {
+numeratore = n;
+denominatore = d;
+}
+
 void stampa() { 
 cout << numeratore << "/" << denominatore;
 int n=getNumeratore(); 
@@ -25,6 +36,8 @@ int d=getDenominatore();
 cout << n<< "/" << d;
 }
 };
+
+
 int main() { 
 Frazione f1, f2;
 f1.setNumeratore(12);
