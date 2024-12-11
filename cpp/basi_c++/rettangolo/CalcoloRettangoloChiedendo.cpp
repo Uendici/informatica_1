@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 class rettangolo {
@@ -14,11 +15,17 @@ public:
     }
     double calcolaArea(){
         return base*altezza;
+    } 
+    
+    double diagonale() {
+        return sqrt(pow(base,2) + pow(altezza,2));
     }
     void stampa(){
         cout << "perimetro: " << calcolaPerimetro() << endl; 
         cout << "area: " << calcolaArea() << endl;
+        cout << "diagonale: " << diagonale() << endl;
     }
+   
     private:
     int base;
     int altezza;
@@ -39,9 +46,9 @@ int main(){
 
     r1.calcolaArea();
     r2.calcolaArea();
-    cout << "il perimetro e l'area del rettangolo 1 sono:" << endl;
+    cout << "il perimetro, l'area e la diagonale del rettangolo 1 sono:" << endl;
     r1.stampa();
-    cout << "il perimetro e l'area del rettangolo 2 sono:" << endl;
+    cout << "il perimetro, l'area e diagonale del rettangolo 2 sono:" << endl;
     r2.stampa();
     return 0;
 }
