@@ -4,11 +4,17 @@ using namespace std;
 
 class rettangolo {
 public:
-    void getbase(){
-        cin >> base;
+    double getbase(){
+        return base;
     }
-    void getaltezza(){
-        cin >> altezza;
+    double getaltezza(){
+        return altezza;
+    }
+    void setbase(int base){
+        this ->base = base;
+    }
+    void setaltezza(int altezza){
+        this ->altezza = altezza;
     }
     double calcolaPerimetro(){
         return 2*(base+altezza);
@@ -34,13 +40,17 @@ public:
 
 int main(){
     rettangolo r1,r2;
-    cout << "inserisci la base e l'altezza del primo rettangolo" << endl;
-    r1.getbase();
-    r1.getaltezza();
-    cout << "inserisci la base e l'altezza del secondo rettangolo" << endl;
-    r2.getbase();
-    r2.getaltezza();
-
+    int a,b,c,d;
+    cout << "scrivi l'altezza e la base del primo rettangolo: " << endl;
+    cin >> a;
+    cin >> b;
+    r1.setaltezza(a);
+    r1.setbase(b);
+    cout << "scrivi l'altezza e la base del secondo rettangolo: " << endl;
+    cin >> c;
+    cin >> d;
+    r2.setaltezza(c);
+    r2.setbase(d);
     r1.calcolaPerimetro();
     r2.calcolaPerimetro();
 

@@ -4,11 +4,17 @@ using namespace std;
 class divisione {
 
     public:
-        void getNumeratore(){
-            cin >> numeratore;
+        double getNumeratore(){
+            return numeratore;
         }
-        void getDenominatore(){
-            cin >> denominatore;
+        double getDenominatore(){
+            return denominatore;
+        }
+        void setNumeratore(double numeratore){
+            this -> numeratore = numeratore;
+        }
+        void setDenominatore(double denominatore){
+            this -> denominatore = denominatore;
         }
         double calcoloFrazione(){
             return numeratore / denominatore;
@@ -24,13 +30,15 @@ class divisione {
 int main(){
     
     divisione d1,d2;
-    cout << "inserisci il numeratore e poi il denominatore della prima divisione" << endl;
-    d1.getNumeratore();
-    d1.getDenominatore();
-    cout << "inserisci il numeratore e poi il denominatore della seconda divisione" << endl;
-    d2.getNumeratore();
-    d2.getDenominatore();
+
+    d1.setNumeratore(4);
+    d1.setDenominatore(2);
+    d2.setNumeratore(9);
+    d2.setDenominatore(3);
+
     d1.calcoloFrazione();
     d2.calcoloFrazione();
-
+    
+    d1.stampa();
+    d2.stampa();
 }
