@@ -1,3 +1,10 @@
+/*
+  Implementare la classe LED e Pulsante e prendendo spunto dal codice d’esempio utilizzando la programmazione ad oggetti, 
+  implementare il metodo press per la classe Pulsante che deve restituire true quando il pulsante risulta premuto e false altrimenti.
+  Testare le classi create in modo che alla pressione del pulsante si accenda il led e venga spento quando rilasciato
+*/
+
+
 // Classe LED
 class LED {
   private:
@@ -9,15 +16,11 @@ class LED {
       pin = p;
       pinMode(pin, OUTPUT);
     }
-
-    // Metodo per accendere il LED
-    void accendi() {
+    accendi() {
       digitalWrite(pin, HIGH);
       stato = true;
     }
-
-    // Metodo per spegnere il LED
-    void spegni() {
+    spegni() {
       digitalWrite(pin, LOW);
       stato = false;
     }
@@ -25,17 +28,19 @@ class LED {
 
   class PULSANTE{
   private:
-    bool pressione;
+    bool pressione = false;
   public:
     PULSANTE(int p){
-      pressione = p;
       pinMode(p, INPUT);
     }
     bool press(){
-      return digitalWrite(pressione) == LOW;
+      if(digitalRead(2) == HIGH){
+        pressione = true;
+      }else{
+        pressione = false;
+      }
+      return pressione;
     }
-
-
   };
 LED ledVerde(12);
 LED ledBlue(13);
