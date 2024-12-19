@@ -56,7 +56,7 @@ class LED {
           inverti();
           break;
         case 4:
-          lampeggio(3);
+          lampeggio(5);
           break;
         default:
           break;
@@ -67,10 +67,10 @@ class LED {
 LED led(11);
 
 void setup() {
-  
+  led.test(4);
 }
 
 void loop() {
-  led.test(4);
+  led.test(1);
 
 }
