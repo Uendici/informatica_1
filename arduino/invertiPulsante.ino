@@ -9,53 +9,46 @@
 class LED {
   private:
     int pin; // Pin del LED
-    bool stato = false;
   public:
     // Costruttore: imposta la modalità del pin del LED come output
-    LED(int p) {
-      pin = p;
+    LED(int pin) {
+      this->pin = pin;
       pinMode(pin, OUTPUT);
     }
     accendi() {
       digitalWrite(pin, HIGH);
-      stato = true;
     }
     spegni() {
       digitalWrite(pin, LOW);
-      stato = false;
     }
 };
 
   class PULSANTE{
   private:
-    bool pressione = false;
+    int pin;
   public:
-    PULSANTE(int p){
-      pinMode(p, INPUT);
-    }
-    bool press(){
-      if(digitalRead(2) == HIGH){
-        pressione = true;
-      }else{
-        pressione = false;
+      PULSANTE(int pin){
+        this->pin = pin;
+        pinMode(pin, INPUT_PULLUP);
       }
-      return pressione;
-    }
+      bool press(){
+        return digitalRead(pin) == LOW;
+      }
   };
 LED ledVerde(12);
 LED ledBlue(13);
-PULSANTE bottone(2);
+PULSANTE pulsante(2);
 
 void setup() {
-  
+    //esegue il codice solo una volta
 }
 
 void loop() {
-  if(bottone.press()){
-    ledVerde.accendi();
-    ledBlue.spegni();
-  }else{
+  if(pulsante.press()){
     ledVerde.spegni();
     ledBlue.accendi();
+  }else{
+    ledVerde.accendi();
+    ledBlue.spegni();
   }
 }
