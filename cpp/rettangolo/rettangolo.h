@@ -1,14 +1,10 @@
-#include <stdio.h>
-#include <math.h>
-
-
 #define RETTANGOLO_H
 
 class rettangolo {
 
 private:
-int base;
-int altezza;
+    int base;
+    int altezza;
 
 public:
     void setbase(int base);
@@ -23,6 +19,5 @@ public:
     double calcolaDiagonale();
 
     //stampa
-
     void stampa();
 }; 
