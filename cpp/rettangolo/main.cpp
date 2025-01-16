@@ -1,6 +1,7 @@
 #include <iostream>
 #include "rettangolo.h"
 
+#ifndef RETTANGOLO_H
 #define RETTANGOLO_H
 
 using namespace std;
@@ -17,14 +18,20 @@ int main(){
     cin >> d;
     r2.setaltezza(c);
     r2.setbase(d);
+    //calcoli
     r1.calcolaPerimetro();
     r2.calcolaPerimetro();
 
     r1.calcolaArea();
     r2.calcolaArea();
+
+    r1.calcolaDiagonale();
+    r2.calcolaDiagonale();
     cout << "il perimetro, l'area e la diagonale del rettangolo 1 sono:" << endl;
     r1.stampa();
     cout << "il perimetro, l'area e diagonale del rettangolo 2 sono:" << endl;
     r2.stampa();
+    
     return 0;
 }
+#endif

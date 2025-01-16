@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "rettangolo.h"
 
 using namespace std;

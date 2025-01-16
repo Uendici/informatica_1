@@ -1,3 +1,4 @@
+#ifndef RETTANGOLO_H
 #define RETTANGOLO_H
 
 class rettangolo {
@@ -21,3 +22,4 @@ public:
     //stampa
     void stampa();
 }; 
+#endif
