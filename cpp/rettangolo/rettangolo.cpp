@@ -29,7 +29,7 @@ double rettangolo::calcolaDiagonale(){
     return sqrt(pow(base,2) + pow(altezza,2)); //sqrt = radice quadrata; pow = esponenziale;
 }
 void rettangolo::stampa(){
-    cout << "perimetro: " << calcolaPerimetro() << endl; 
+    cout << "perimetro: " << calcolaPerimetro() << endl;
     cout << "area: " << calcolaArea() << endl;
     cout << "diagonale: " << calcolaDiagonale() << endl;
 }
