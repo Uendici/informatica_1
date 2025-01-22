@@ -6,13 +6,11 @@ class rettangolo {
 private:
     int base;
     int altezza;
-
 public:
     void setbase(int base);
     void setaltezza(int altezza);
     double getbase();
     double getaltezza();
-
 
     //funzioni per i calcoli
     double calcolaPerimetro();
