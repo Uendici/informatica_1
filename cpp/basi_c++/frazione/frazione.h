@@ -1,4 +1,5 @@
-
+#define FRAZIONE_H
+#ifndef FRAZIONE_H
 class frazione{
 
     private:
@@ -9,8 +10,14 @@ class frazione{
                 this -> numeratore = numeratore;
                 this -> denominatore = denominatore;
             }
-            int setnumeratore;
-            int setdenominatore;
-            
+            int setnumeratore(){
+                return numeratore;
+            }
+            int setdenominatore(){
+                return denominatore;
+            }
+            double calcolo();
+            void stampa();
 
 };
+#endif
