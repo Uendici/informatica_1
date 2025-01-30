@@ -10,14 +10,17 @@ LED ledVerde(13);
 PULSANTE pulsanteVerde(12);
 LED ledBlue(11);
 PULSANTE pulsanteBlu(10);
-LED ledYellow(11);
-PULSANTE pulsanteYellow(10);
-LED ledRed(11);
-PULSANTE pulsanteRed(10);
+LED ledYellow(9);
+PULSANTE pulsanteYellow(8);
+LED ledRed(7);
+PULSANTE pulsanteRed(6);
 
 
 void setup() {
   ledVerde.test(2);
+  ledBlue.test(3);
+  ledYellow.test(1);
+  ledRed.test(4);
 }
 
 void loop() {

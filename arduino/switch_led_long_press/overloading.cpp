@@ -76,7 +76,12 @@ void LED::test(int scelta){
     case 2:
             lampeggio(3,200);
             break;
-
+    case 3:
+            spegni();
+            break;
+    case 4:
+            accendi(3000);
+            break;
   }
 
 }
