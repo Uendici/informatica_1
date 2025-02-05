@@ -1,37 +1,43 @@
 #include <iostream>
-#include <math.h>
+#include <cmath> 
 #include "rettangolo.h"
 
 using namespace std;
 
-double rettangolo::getbase(){
+// get
+double rettangolo::getbase() {
     return base;
 }
-double rettangolo::getaltezza(){
+
+double rettangolo::getaltezza() {
     return altezza;
 }
-void rettangolo::setbase(int base){
-    this ->base = base;
-}
-void rettangolo::setaltezza(int altezza){
-    this ->altezza = altezza;
+
+// set
+void rettangolo::setbase(int base) {
+    this->base = base;
 }
 
-//funzioni per i calcoli
-
-double rettangolo::calcolaPerimetro(){
-    return 2*(base+altezza);
-}
-double rettangolo::calcolaDiagonale(){
-    return base*altezza;
-}
-double rettangolo::calcolaDiagonale(){
-    return sqrt(pow(base,2) + pow(altezza,2)); //sqrt = radice quadrata; pow = esponenziale;
-}
-void rettangolo::stampa(){
-    cout << "perimetro: " << calcolaPerimetro() << endl;
-    cout << "area: " << calcolaArea() << endl;
-    cout << "diagonale: " << calcolaDiagonale() << endl;
+void rettangolo::setaltezza(int altezza) {
+    this->altezza = altezza;
 }
 
+// Funzioni per i calcoli
+double rettangolo::calcolaPerimetro() {
+    return 2 * (base + altezza);
+}
 
+double rettangolo::calcolaArea() {
+    return base * altezza;
+}
+
+double rettangolo::calcolaDiagonale() {
+    return sqrt(base * base + altezza * altezza);
+}
+
+// Stampa risultati
+void rettangolo::stampa() {
+    cout << "Perimetro: " << calcolaPerimetro() << endl;
+    cout << "Area: " << calcolaArea() << endl;
+    cout << "Diagonale: " << calcolaDiagonale() << endl;
+}
