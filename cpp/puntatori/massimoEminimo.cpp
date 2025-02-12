@@ -11,7 +11,7 @@ void stampaVettore(int *p);
 
 int main(){
     int a,vet[N];
-    int *pmax = NULL, *pmin = NULL;
+    int *pmax = NULL;
     pmax = vet;
     srand(time(NULL));
     caricaVettore(vet);
