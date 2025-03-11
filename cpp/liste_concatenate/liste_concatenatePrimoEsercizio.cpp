@@ -3,10 +3,10 @@
 #include <ctime>
 using namespace std;
 //Implementare una lista concatenata semplice con le operazioni di base: inserimento in testa, in coda, eliminazione, ricerca e visualizzazione.
-typedef struct {
-    string dato;
+struct Nodo {
+    int dato;
     Nodo *next;
-}Nodo;
+};typedef struct Nodo nodo;
 
 class Lista {
     private:
