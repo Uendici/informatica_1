@@ -15,7 +15,7 @@ private:
     Nodo* head;
 public:
     Lista() {
-        head = nullptr;
+        head = nullptr;//nullptr sarebbe NULL ma in c++ 
     }
 
     // Inserisce un nodo in testa
