@@ -7,7 +7,8 @@ class rettangolo{
         int altezza;
     public:
         rettangolo();
-        int getBase();
+        int
+         getBase();
         int getAltezza();
 
         void setBase(int base);
