@@ -21,7 +21,7 @@ class LISTA{
         l->next = testa;
         testa = l;
     }
-
+    // Inserimento in coda
     void inserimentoincoda(){
         nodo *l = new nodo;
         l->info = rand() % 100;
