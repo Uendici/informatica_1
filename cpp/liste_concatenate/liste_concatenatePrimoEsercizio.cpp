@@ -97,20 +97,33 @@ public:
 int main() {
     srand(time(nullptr));
     Lista l;
-
+    int scelta;
+    cout << "Scegliere l'opzione da eseguire: " << endl;
+    cin >> scelta;
     for (int i = 0; i < 10; i++) {
         l.testa();
     }
+    l.Visualizza();
+    switch (scelta) {
+        case 1:
+            cout << "Inserimento in coda" << endl;
+            l.InserisciUltimo();
+            break;
+        case 2:
+            cout << "Eliminazione" << endl;
+            l.Elimina();
+            break;
+        case 3:
+            cout << "Ricerca" << endl;
+            l.Ricerca();
+            break;
+        default:
+            cout << "Opzione non valida." << endl;
+    }
 
-    cout << "Lista iniziale: ";
-    l.Visualizza();
-    l.Ricerca();
-    l.Elimina();
-    cout << "Lista dopo eliminazione: ";
-    l.Visualizza();
-    l.InserisciUltimo();
-    cout << "Lista dopo inserimento in coda: ";
-    l.Visualizza();
+    cout << "Lista dopo l'operazione" << endl;
 
+    cout << "Lista" << endl;
+    l.Visualizza();
     return 0;
 }
