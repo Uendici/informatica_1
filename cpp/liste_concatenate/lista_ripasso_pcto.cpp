@@ -56,4 +56,4 @@ int main(){
         l.inserimentoincoda();
     }
     l.stampa();
-}
+} 

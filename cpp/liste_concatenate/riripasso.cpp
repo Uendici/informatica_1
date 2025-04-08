@@ -51,7 +51,6 @@ class lista{
             precedente = l;
             delete l;
             l = l->next;
-            
         }
     }
 };
