@@ -9,7 +9,7 @@ typedef struct Nodo{
 } nodo;
 
 class LISTA{
-    private:
+    private:                                                                                                
     nodo* testa;
     public:
     LISTA(){
