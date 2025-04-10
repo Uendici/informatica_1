@@ -56,4 +56,6 @@ int main(){
         l.inserimentoincoda();
     }
     l.stampa();
+    cout << " " << endl;
+    cout << "in tempo di guerra ogni buco è trincea... " << endl;
 } 
