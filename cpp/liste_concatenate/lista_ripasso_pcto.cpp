@@ -33,7 +33,7 @@ class LISTA{
             while(p->next != nullptr){
                 p = p->next;
             }
-            p->next = l;
+            p->next = l; 
         }
     }
     void stampa(){
