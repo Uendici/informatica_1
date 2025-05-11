@@ -15,9 +15,21 @@
         
         console.log("scegli quale operazione fare:\n1) +\n2) -\n3) *\n4) /\n");
         let scelta = prompt("fai la tua scelta");
-        if(scelta == "1"){
+        switch (scelta) {
+          case "1":
             n3 = n1 + n2;
+            break;
+          case "2":
+            n3 = n1 - n2;
+            break;
+          case "3":
+            n3 = n1 * n2;
+            break;
+          case "4":
+            n3 = n1 / n2;
+            break;
         }
+        console.log("Il risultato è: " + n3);
     </script>
 </body>
 </html>
