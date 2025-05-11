@@ -28,13 +28,12 @@ class LISTA{
         l->next = nullptr;
         if(testa == nullptr){
             testa = l;
-        }else{
+        }
             nodo *p = testa;
             while(p->next != nullptr){
                 p = p->next;
             }
             p->next = l; 
-        }
     }
     void stampa(){
         nodo *p = testa;
