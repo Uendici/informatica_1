@@ -4,53 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ci proviamo ragazzi</title>
-</head>
-<body>
-
-</body>
-</html>
     <style>
         body {
             margin: 0;
             padding: 20px;
             font-family: economic, sans-serif;
-            background-color: #333;
+            background-color: #41b44b;
             color: white;
             text-align: center;
         }
     </style>
+</head>
+<body>
+    <h1>GiocoFrog</h1>
+    <p>Usa le frecce per muovere la rana!</p>
+    <img id="myImage" src="frog.png" style="display:none;">
+    <br>
+    <canvas id="froggame" width="5000" height="5000" ></canvas>
+
     <script>
-        var canvas = document.getElementById("frogUwU.html");
-        if (!canvas) {
-            canvas = document.createElement("canvas");
-            canvas.id = "frogUwU.html";
-            canvas.width = 500;
-            canvas.height = 500;
-            document.body.appendChild(canvas);
-        }
+        var canvas = document.getElementById("froggame");
         var ctx = canvas.getContext("2d");
+
+        const image = document.getElementById("myImage");
+        image.onload = () => {
+            ctx.drawImage(image, 500, 500, 100,100); // Disegna l'immagine a partire da (50, 50)
+        };
+
         var frog = new Image();
         frog.src = "mexican-FROG.png";
-        
-        //dimensione del canvas
-        const canvasWidth = columns * gridSize;    // 600px
-        const canvasHeight = rows * gridSize;      // 650px
-        // Set the size of the grid
-        const gridSize = 50;
-        const rows = 10;
-        const columns = 10;
-        let frogX = 0;
-        let frogY = 0;
 
+        ctx.fillStyle = "green";
+        ctx.fillRect(50, 50, 100, 75);
+        
+        
+        // Movimento della rana in base alla pressione dei tasti
         window.addEventListener("keydown", function(event) {
             if (event.key === "ArrowUp") {
-                y -= 10;
+                frogY -= 10;
             } else if (event.key === "ArrowDown") {
-                y += 10;
+                frogY += 10;
             } else if (event.key === "ArrowLeft") {
-                x -= 10;
+                frogX -= 10;
             } else if (event.key === "ArrowRight") {
-                x += 10;
+                frogX += 10;
             }
             drawFrog();
         });
@@ -58,4 +55,12 @@
         frog.onload = function() {
             drawFrog();
         };
+
+        function drawFrog() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(frog, frogX, frogY, gridSize, gridSize);
+        }
     </script>
+
+</body>
+</html>
