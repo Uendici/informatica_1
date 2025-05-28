@@ -1,0 +1,363 @@
+
+
+GESTIONE DEI FILE IN C 
+
+
+Apertura file
+
+FILE *file = fopen("nomefile.txt", "modalità");
+Modalità comuni:
+
+"r" — apertura in lettura
+
+"w" — apertura in scrittura (sovrascrive)
+
+"a" — apertura in scrittura (aggiunge in coda)
+
+"r+" — lettura e scrittura
+
+Controllo apertura file
+
+if (file == NULL) {
+    perror("Errore apertura file");
+    return 1;
+}
+Lettura da file
+Leggere una riga (stringa) con fgets
+
+char buffer[100];
+if (fgets(buffer, 100, file) != NULL) {
+    // uso buffer
+}
+Leggere carattere per carattere con fgetc
+
+int c;
+while ((c = fgetc(file)) != EOF) {
+    putchar(c);
+}
+Lettura binaria con fread
+
+size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+Scrittura su file
+Scrivere stringa con fputs
+
+fputs("Ciao mondo\n", file);
+Scrivere carattere con fputc
+
+fputc('A', file);
+Scrittura binaria con fwrite
+
+size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+Chiusura file
+
+fclose(file);
+Altre funzioni utili
+feof(file) — verifica se è stato raggiunto la fine del file (End Of File)
+
+ferror(file) — verifica se è avvenuto un errore di lettura/scrittura
+
+rewind(file) — riporta il puntatore all’inizio del file
+
+fprintf(file, "formato", ...) — stampa formattata sul file
+
+
+
+
+
+
+
+
+
+
+
+
+ARRAY DI RECORD (STRUCT) IN C
+Definizione di un record (struct)
+
+struct Persona {
+    char nome[50];
+    int eta;
+};
+Dichiarazione di un array di struct
+
+struct Persona persone[10];
+
+
+Inizializzazione di un singolo elemento
+
+strcpy(persone[0].nome, "Mario");
+persone[0].eta = 30;
+Accesso ai membri
+
+
+printf("Nome: %s, Età: %d\n", persone[i].nome, persone[i].eta);
+Ciclo su un array di struct
+
+for (int i = 0; i < 10; i++) {
+    printf("Persona %d: %s, %d\n", i, persone[i].nome, persone[i].eta);
+}
+Inizializzazione completa al momento della dichiarazione
+
+struct Persona persone[2] = {
+    {"Anna", 25},
+    {"Luca", 40}
+};
+Passaggio di un struct a una funzione
+
+void stampaPersona(struct Persona p) {
+    printf("%s ha %d anni.\n", p.nome, p.eta);
+}
+Chiamata:
+
+
+stampaPersona(persone[0]);
+Passaggio per riferimento (puntatore)
+
+void modificaEta(struct Persona *p, int nuovaEta) {
+    p->eta = nuovaEta;
+}
+Chiamata:
+
+
+modificaEta(&persone[0], 35);
+Uso dinamico di array di struct con malloc
+
+struct Persona *persone = malloc(n * sizeof(struct Persona));
+if (persone == NULL) {
+    perror("malloc fallita");
+    exit(1);
+}
+Ricordati di liberare la memoria:
+
+free(persone);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAMMAZIONE ORIENTATA A OGGETTI (OOP) IN C++ - CLASSI
+
+
+
+Definizione di una classe
+
+class NomeClasse {
+public:
+    // attributi (variabili membro)
+    int attributo;
+
+    // metodi (funzioni membro)
+    void metodo();
+};
+
+
+Creare un oggetto
+
+
+NomeClasse oggetto;
+
+Accesso a membri
+
+oggetto.attributo = 10;
+oggetto.metodo();
+Visibilità (modificatori di accesso)
+public: — accessibile ovunque
+
+private: — accessibile solo all’interno della classe (default)
+
+protected: — accessibile nelle classi derivate
+
+Costruttore
+Metodo speciale chiamato automaticamente alla creazione dell’oggetto.
+
+class NomeClasse {
+public:
+    NomeClasse() {
+        // codice di inizializzazione
+    }
+};
+Con parametri:
+
+NomeClasse(int x) {
+    attributo = x;
+}
+Distruttore
+Metodo speciale chiamato alla distruzione dell’oggetto
+
+~NomeClasse() {
+    // codice di pulizia
+}
+Metodi const
+Garantiscono che il metodo non modifichi l’oggetto
+
+void metodo() const {
+    // ...
+}
+Incapsulamento
+Attributi privati
+
+Accesso tramite metodi pubblici (getter/setter)
+
+private:
+    int valore;
+
+public:
+    int getValore() const { return valore; }
+    void setValore(int v) { valore = v; }
+Esempio completo base
+
+
+class Persona {
+private:
+    string nome;
+    int eta;
+
+public:
+    Persona(string n, int e) : nome(n), eta(e) {}
+    void saluta() const {
+        cout << "Ciao, sono " << nome << " e ho " << eta << " anni." << endl;
+    }
+};
+Ereditarietà
+
+
+class Studente : public Persona {
+private:
+    int matricola;
+
+public:
+    Studente(string n, int e, int m) : Persona(n, e), matricola(m) {}
+};
+Polimorfismo (metodi virtuali)
+
+
+class Base {
+public:
+    virtual void metodo() {
+        cout << "Base" << endl;
+    }
+};
+
+class Derivata : public Base {
+public:
+    void metodo() override {
+        cout << "Derivata" << endl;
+    }
+};
+Puntatori a oggetti e new / delete
+
+
+NomeClasse *p = new NomeClasse();
+p->metodo();
+delete p;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LISTE CONCATENATE IN C
+
+
+Definizione del nodo (struct)
+
+struct Nodo {
+    int dato;
+    struct Nodo *next;
+};
+Creazione di un nodo (allocazione dinamica)
+
+struct Nodo *nuovoNodo = malloc(sizeof(struct Nodo));
+if (nuovoNodo == NULL) {
+    perror("malloc fallita");
+    exit(1);
+}
+nuovoNodo->dato = valore;
+nuovoNodo->next = NULL;
+Inserimento in testa alla lista
+
+nuovoNodo->next = testa;
+testa = nuovoNodo;
+Scorrere la lista (iterazione)
+
+struct Nodo *corrente = testa;
+while (corrente != NULL) {
+    printf("%d ", corrente->dato);
+    corrente = corrente->next;
+}
+Inserimento in coda
+
+struct Nodo *corrente = testa;
+while (corrente->next != NULL) {
+    corrente = corrente->next;
+}
+corrente->next = nuovoNodo;
+nuovoNodo->next = NULL;
+Ricerca di un valore nella lista
+
+struct Nodo *corrente = testa;
+while (corrente != NULL && corrente->dato != valoreCercato) {
+    corrente = corrente->next;
+}
+if (corrente != NULL) {
+    printf("Valore trovato!\n");
+} else {
+    printf("Valore non trovato.\n");
+}
+Eliminazione del primo nodo
+
+if (testa != NULL) {
+    struct Nodo *temp = testa;
+    testa = testa->next;
+    free(temp);
+}
+Eliminazione di un nodo con valore specifico
+
+struct Nodo *corrente = testa;
+struct Nodo *prec = NULL;
+
+while (corrente != NULL && corrente->dato != valoreDaEliminare) {
+    prec = corrente;
+    corrente = corrente->next;
+}
+
+if (corrente == NULL) {
+    printf("Valore non trovato\n");
+} else {
+    if (prec == NULL) {
+        testa = corrente->next;
+    } else {
+        prec->next = corrente->next;
+    }
+    free(corrente);
+}
+Liberare tutta la lista
+
+struct Nodo *corrente = testa;
+while (corrente != NULL) {
+    struct Nodo *temp = corrente;
+    corrente = corrente->next;
+    free(temp);
+}
+testa = NULL;
